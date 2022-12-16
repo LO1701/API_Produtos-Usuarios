@@ -5,12 +5,13 @@ import {
     patchUsuario,
     deleteUsuario
 } from "../controller/UsuarioController.js";
+import { vereficarUsuario, vereficarAdmin } from "../middleware/AuthUsuario.js";
 
 const router = express.Router();
 
-router.get('/usuario', getUsuario);
-router.post('/usuario', postUsuario);
-router.patch('/usuario/:id', patchUsuario);
-router.delete('/usuario/:id', deleteUsuario);
+router.get('/usuario', vereficarUsuario, vereficarAdmin, getUsuario);
+router.post('/usuario', vereficarUsuario, vereficarAdmin, postUsuario);
+router.patch('/usuario/:id', vereficarUsuario, vereficarAdmin, patchUsuario);
+router.delete('/usuario/:id', vereficarUsuario, vereficarAdmin, deleteUsuario);
 
 export default router;
