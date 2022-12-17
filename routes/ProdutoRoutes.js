@@ -5,12 +5,14 @@ import {
     patchProdutos,
     deleteProdutos
 } from "../controller/ProdutoController.js"
+import {vereficarUsuario} from "../middleware/AuthUsuario.js"
+
 
 const router = express.Router();
 
-router.get('/produto', getProdutos);
-router.post('/produto', postProdutos);
-router.patch('/produto/:id', patchProdutos);
-router.delete('/produto/:id', deleteProdutos);
+router.get('/produto', vereficarUsuario, getProdutos);
+router.post('/produto', vereficarUsuario, postProdutos);
+router.patch('/produto/:id', vereficarUsuario, patchProdutos);
+router.delete('/produto/:id', vereficarUsuario, deleteProdutos);
 
 export default router;
